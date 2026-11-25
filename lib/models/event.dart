@@ -1,12 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class SchoolEvent {
   final String id;
   final String title;
   final String description;
   final String location;
   final DateTime startsAt;
-  final int attendeeCount;
 
   const SchoolEvent({
     required this.id,
@@ -14,18 +11,20 @@ class SchoolEvent {
     required this.description,
     required this.location,
     required this.startsAt,
-    required this.attendeeCount,
   });
 
-  factory SchoolEvent.fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
-    final d = doc.data()!;
-    return SchoolEvent(
-      id: doc.id,
-      title: d['title'] as String,
-      description: d['description'] as String,
-      location: d['location'] as String,
-      startsAt: (d['startsAt'] as Timestamp).toDate(),
-      attendeeCount: (d['attendeeCount'] as num?)?.toInt() ?? 0,
-    );
-  }
+  factory SchoolEvent.fromJson(String id, Map<dynamic, dynamic> j) => SchoolEvent(
+        id: id,
+        title: (j['title'] ?? '').toString(),
+        description: (j['description'] ?? '').toString(),
+        location: (j['location'] ?? '').toString(),
+        startsAt: DateTime.tryParse((j['startsAt'] ?? '').toString()) ?? DateTime.now(),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'description': description,
+        'location': location,
+        'startsAt': startsAt.toIso8601String(),
+      };
 }
