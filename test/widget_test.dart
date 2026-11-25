@@ -2,7 +2,6 @@ import 'package:capstone_reyes/main.dart';
 import 'package:capstone_reyes/models/event.dart';
 import 'package:capstone_reyes/services/event_service.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// In-memory stand-in so tests never touch the network.
 class FakeEventService extends EventService {
@@ -54,8 +53,6 @@ class FakeEventService extends EventService {
 }
 
 void main() {
-  setUp(() => SharedPreferences.setMockInitialValues({}));
-
   testWidgets('Shows the student ID screen first', (tester) async {
     await tester.pumpWidget(EventApp(service: FakeEventService()));
     await tester.pumpAndSettle();

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Screen 1: enter a student ID (no real auth).
 class StudentIdScreen extends StatefulWidget {

@@ -1,21 +1,11 @@
-import 'package:shared_preferences/shared_preferences.dart';
-
-/// "Login" is just a remembered student ID. No passwords, no Firebase Auth.
+/// "Login" is just the student ID typed in. No passwords, no Firebase Auth.
+/// Kept in memory only (no plugins), so it is forgotten when the app restarts.
 class StudentSession {
-  static const _key = 'student_id';
+  static String? _id;
 
-  static Future<String?> load() async {
-    final p = await SharedPreferences.getInstance();
-    return p.getString(_key);
-  }
+  static Future<String?> load() async => _id;
 
-  static Future<void> save(String id) async {
-    final p = await SharedPreferences.getInstance();
-    await p.setString(_key, id);
-  }
+  static Future<void> save(String id) async => _id = id;
 
-  static Future<void> clear() async {
-    final p = await SharedPreferences.getInstance();
-    await p.remove(_key);
-  }
+  static Future<void> clear() async => _id = null;
 }

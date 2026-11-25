@@ -2,7 +2,7 @@
 // Data: Firebase Realtime Database (REST). Events have full CRUD; students RSVP by ID.
 // Flow: Student ID -> Home (All / My Events) -> Event detail -> Create / Edit event.
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'screens/home_screen.dart';
 import 'screens/student_id_screen.dart';
